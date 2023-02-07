@@ -1,0 +1,89 @@
+<ng-template #contents let-modal style="z-index: 1000;">
+    <div class="modal-header" >
+      <h4 class="modal-title" id="modal-basic-title">จัดการ Company</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+      <form>
+        <div class="mb-3">  
+          avatar
+          <input class="form-control" [formControl]="avatar" type="text" />
+        </div>
+        <div class="mb-3">  
+          name
+          <input class="form-control" [formControl]="name" type="text" />
+        </div>
+        <div class="mb-3">  
+            company
+          <input class="form-control" [formControl]="company" type="text" />
+        </div>
+        <div class="mb-3">  
+            status
+         <input class="form-control" [formControl]="status" type="text" />
+       </div>
+       <div class="mb-3">  
+        dueDate
+      <input class="form-control" [formControl]="dueDate" type="text" />
+    </div>
+    <div class="mb-3">  
+        targetAchievement
+      <input class="form-control" [formControl]="targetAchievement" type="number" />
+    </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="save();modal.close('Save click')">Save</button> 
+    </div>
+  </ng-template>
+
+
+
+<div class="card main-card mb-3">
+    <div class="card-header">
+      Basic
+    </div>
+    <button type="button" (click)="open(contents,null,null,null,null,null,null,null)" class="btn-shadow d-inline-flex align-items-center btn btn-success">
+      <i aria-hidden="true" title="plus-square-o" class="fa fa-fw"></i>
+      Create New Company
+    </button>
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Company</th>
+        <th scope="col">Status</th>
+        <th scope="col">DueDate</th>
+        <th scope="col">TargetAchievement</th>
+        <th scope="col">Edit</th>
+        <th scope="col">Delete</th>
+      </tr>
+      </thead>
+      
+      <tbody>
+      <tr *ngFor="let c of companie; index as i">
+        <th scope="row">{{ i+1 }}</th>
+        
+        <td>
+            <img [src]="c.avatar" class="me-2" [src]="'https://upload.wikimedia.org/wikipedia/commons/' + c.avatar" class="me-2"
+                 style="width: 20px">
+                 {{ c.companyId }}{{ c.name }}
+          </td>
+        <td>{{ c.company }}</td>
+        <td>{{ c.status }}</td>
+        <td>{{ c.dueDate }}</td>
+        <td>{{ c.targetAchievement }}</td>
+        <td>    
+          <button type="button" (click)="open(contents,c.avatar ,c.name,c.company,c.status,c.dueDate,c.targetAchievement,c.companyId)"  class="btn-shadow d-inline-flex align-items-center btn btn-info">
+            <i aria-hidden="true" title="edit" class="fa fa-fw"></i> 
+           </button> 
+         </td>
+         <td>    
+           <button type="button" (click)="delete(c.companyId)"  class="btn-shadow d-inline-flex align-items-center btn btn-danger">
+            <i aria-hidden="true" title="trash-o" class="fa fa-fw"></i>
+           </button>
+          </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
